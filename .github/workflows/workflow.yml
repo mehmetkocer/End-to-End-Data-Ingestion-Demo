@@ -1,8 +1,8 @@
 name: Deploy for preview
 
 on:
-  pull_request:
-    branches: [ master ] 
+  schedule:
+    -cron : '@daily'
 
 jobs:
   preview:
