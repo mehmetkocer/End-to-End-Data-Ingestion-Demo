@@ -1,8 +1,7 @@
-name: Deploy for preview
+name: Upload to S3
 
 on:
-  schedule:
-    - cron: '33 23 * * *'
+  workflow_dispatch:
 
 jobs:
   upload:
