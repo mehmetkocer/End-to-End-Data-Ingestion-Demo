@@ -1,3 +1,19 @@
+resource "aws_s3_bucket_object" "object1" {
+  bucket = var.bucket
+  key = "read/random_bank.json"
+  acl = "private"
+  source = "../data/random_bank.json"
+  etag = filemd5("../data/random_bank.json")
+}
+
+resource "aws_s3_bucket_object" "object2" {
+  bucket = var.bucket
+  key = "scala/json_converter.scala"
+  acl = "private"
+  source = "../src/scala/json_converter.scala"
+  etag = filemd5("../src/scala/json_converter.scala")
+}
+
 resource "aws_glue_job" "converter-job" {
   name     = "intern-mehmet-kocer-converter-job"
   role_arn = data.aws_iam_role.role1.arn
