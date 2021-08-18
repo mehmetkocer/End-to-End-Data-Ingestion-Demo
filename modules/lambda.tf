@@ -11,25 +11,15 @@ data "archive_file" "lambda" {
   source_file = "../src/python/main.py"
   output_path = "../src/python/main.py.zip"
 }
-module lambda {
-  source  = "terraform-module/lambda/aws"
-  version = "2.10.0"
+resource "aws_lambda_function" "python_lambda" {
+  filename      = data.archive_file.lambda.output_path
+  function_name = "intern-mehmet-python-function"
+  role          = data.aws_iam_role.role1.arn
+  handler       = "index.test"
 
-  function_name      = "intern-python-function"
-  filename            = data.archive_file.lambda.output_path
-  description        = "Python function for updating data and triggering Glue job."
-  handler            = "index.handler"
-  runtime            = "python3.8"
-  memory_size        = "128"
-  concurrency        = "1"
-  lambda_timeout     = "5"
-  log_retention      = "1"
-  role_arn           = data.aws_iam_role.role1.arn
-  environment = {
-    Environment = "intern"
-  }
-
+  runtime = "python3.8"
   tags = {
     Environment = "intern"
   }
 }
+
