@@ -1,4 +1,3 @@
-import SparkDemo.spark.sqlContext
 import org.apache.spark.sql.SparkSession
 
 object Json_converter {
@@ -7,12 +6,12 @@ object Json_converter {
 
     val spark = SparkSession
       .builder
-      .appName("intern-mk-json-converter")
+      .appName("Json_converter")
       .master("local[*]")
       .getOrCreate()
 
-    val df = sqlContext.read.json("s3://intern-mehmetkocer/read/random_bank.json")
-    df.write.parquet("s3://intern-mehmetkocer/read/")
+    val df = spark.read.json("s3://intern-mehmetkocer/read/random_bank.json")
+    df.write.parquet("s3://intern-mehmetkocer/write-bank-data/")
   }
   
 }
