@@ -15,7 +15,6 @@ resource "aws_lambda_function" "python_lambda" {
   filename      = data.archive_file.lambda.output_path
   function_name = "intern-mehmet-python-function"
   role          = data.aws_iam_role.role1.arn
-  handler       = "index.test"
 
   runtime = "python3.8"
   tags = {
